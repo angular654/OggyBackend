@@ -20,8 +20,8 @@ export class AuthController {
 
   @Post("login")
   async login(@Body() loginUserDto: LoginUserDto): Promise<LoginUserResponse> {
-    const user_find = await this.authService.findUserByLogin(
-      loginUserDto.login
+    const user_find = await this.authService.findUserByEmail(
+      loginUserDto.email
     );
     const ispassword = bcrypt.compareSync(
       loginUserDto.password,
@@ -29,7 +29,7 @@ export class AuthController {
     );
     if (ispassword === true) {
       const data: LoginUserDto = {
-        login: user_find.login,
+        email: user_find.email,
         password: user_find.password,
       };
       const user = await this.authService.findUser(data);
@@ -58,12 +58,12 @@ export class AuthController {
       const user = await this.authService.createUser(createUserDto);
       const token = sign({ _id: user.id }, dotenv.config().parsed.USERS_SECRET, { expiresIn: '90d' });
       await this.authService.setToken(
-        { login: user.login, password: user.password },
+        { email: user.email, password: user.password },
         token,
       );
       return {
         token,
-        login: user.login,
+        name: user.name,
         email: user.email
       };
     } catch (e) {

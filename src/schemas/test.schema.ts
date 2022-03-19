@@ -9,6 +9,9 @@ export class Test {
     title: string;
 
     @Prop({ required: true })
+    type_test: string;
+
+    @Prop({ required: true })
     time_lim: Number;
 
     @Prop({ required: true, default: [] })

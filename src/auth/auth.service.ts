@@ -13,7 +13,7 @@ export class AuthService {
   createUser(registerUserDto: RegisterUserDto): Promise<UserDocument> {
     const password = bcrypt.hashSync(registerUserDto.password, 10);
     const data = {
-      login: registerUserDto.login,
+      name: registerUserDto.name,
       telephone: registerUserDto.telephone,
       email: registerUserDto.email,
       password: password,
@@ -24,8 +24,8 @@ export class AuthService {
   findUser(loginUserDto: LoginUserDto): Promise<UserDocument> {
     return this.userModel.findOne(loginUserDto).exec();
   }
-  findUserByLogin(login: string): Promise<UserDocument> {
-    return this.userModel.findOne({ login: login }).exec();
+  findUserByEmail(email: string): Promise<UserDocument> {
+    return this.userModel.findOne({ email: email }).exec();
   }
   setToken(loginUserDto: LoginUserDto, token: string) {
     return this.userModel.findOneAndUpdate(loginUserDto, { token: token });

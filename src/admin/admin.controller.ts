@@ -10,7 +10,13 @@ export class AdminController {
     
     @Post('create_test')
     async create(loadTestDto: LoadTestDto) {
-        return await this.adminService.createTest(loadTestDto)
+        try {
+            const test = await this.adminService.createTest(loadTestDto) 
+            return {...test, info:'Тест создан'}
+        }
+        catch(e) {
+            return {...e, info: 'Ошибка создания теста'}
+        }
       }
 
     @Get('tests')

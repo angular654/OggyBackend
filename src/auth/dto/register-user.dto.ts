@@ -1,5 +1,5 @@
 export class RegisterUserDto {
-  login: string;
+  name: string;
   telephone?: number;
   email: string;
   password: string;
@@ -7,6 +7,6 @@ export class RegisterUserDto {
 
 export class RegisterUserResponse {
   token: string;
-  login: string;
+  name: string;
   email: string;
 }

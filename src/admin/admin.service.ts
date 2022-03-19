@@ -13,6 +13,7 @@ export class AdminService {
         const data = {
             title: loadedTest.title,
             questions: loadedTest.questions,
+            type_test: loadedTest.type_test,
             time_lim: loadedTest.time_lim,
             answers: loadedTest.answers,
           };
